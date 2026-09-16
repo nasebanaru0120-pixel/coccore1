@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coccole Care | つながる仲間を探しています</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:      #FFFBF4;
+    --cream-2:    #FFF0E9;
+    --ink:        #4A3B33;
+    --ink-soft:   #8A7566;
+    --forest:     #2C5233;
+    --forest-2:   #1B3620;
+    --coral:      #E75A34;
+    --pink:       #E2588F;
+    --sky:        #2E86A8;
+    --gold:       #E4A526;
+    --line:       rgba(74,59,51,0.12);
+    --tint-forest:#E7F3EB;
+    --tint-coral: #FFEBE1;
+    --tint-pink:  #FFE7EF;
+    --tint-sky:   #E6F5F8;
+    --tint-gold:  #FFF3D9;
+    --solid-forest:#5B9678;
+    --solid-coral: #F17A52;
+    --solid-pink:  #F0779E;
+    --solid-sky:   #57B4CB;
+    --radius-s: 18px;
+    --radius-m: 28px;
+    --font: "Zen Maru Gothic", sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --cream:      #241D19;
+      --cream-2:    #2C231D;
+      --ink:        #FBEFE6;
+      --ink-soft:   #D9C2B2;
+      --line:       rgba(251,239,230,0.16);
+    }
+  }
+  :root[data-theme="dark"]{
+    --cream:      #241D19; --cream-2:#2C231D; --ink:#FBEFE6; --ink-soft:#D9C2B2; --line:rgba(251,239,230,0.16);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--cream); color:var(--ink); font-family:var(--font); font-weight:600; line-height:1.9; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  img,svg{ max-width:100%; display:block; }
+  .wrap{ max-width:480px; margin:0 auto; padding:0 24px; position:relative; text-align:center; }
+  section{ padding:64px 0; position:relative; }
+  section.tight{ padding:48px 0; }
+
+  h1,h2,h3{ font-family:var(--font); font-weight:900; color:var(--ink); }
+  h2{ font-size:1.55rem; line-height:1.55; margin-bottom:14px; }
+  h3{ font-weight:700; }
+  .eyebrow{ font-size:.78rem; color:var(--coral); font-weight:700; margin-bottom:6px; }
+  .lede{ color:var(--ink-soft); font-weight:600; font-size:.95rem; margin:0 auto 30px; }
+  a{ color:inherit; }
+
+  .icon-crayon{ filter:url(#crayon); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:56px 0 48px;
+    background: linear-gradient(180deg,#FFF6E4 0%, var(--cream) 70%);
+  }
+  .hero-illust{ width:180px; margin:0 auto 22px; }
+  .hero-tag{
+    display:inline-flex; align-items:center; gap:8px; font-size:.8rem; font-weight:700; color:var(--forest);
+    border:2px solid var(--forest); background:#fff; padding:7px 15px; border-radius:999px; margin-bottom:22px;
+  }
+  .hero h1{ font-size:2.15rem; line-height:1.55; margin-bottom:18px; }
+  .hero h1 span{ color:var(--coral); }
+  .hero p.hero-sub{ font-size:1rem; font-weight:600; color:var(--ink-soft); margin:0 auto 28px; }
+  .hero-cta{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--font); font-weight:700; font-size:.92rem;
+    padding:14px 22px; border-radius:999px; border:2px solid transparent; cursor:pointer; text-decoration:none;
+    transition:transform .18s ease;
+  }
+  .btn:active{ transform:scale(.96); }
+  .btn-primary{ background:var(--coral); color:#fff; box-shadow:0 6px 0 #E06B48; }
+  .btn-ghost{ background:#fff; border-color:var(--pink); color:var(--ink); }
+
+  /* ---------- ABOUT ---------- */
+  .about-quote{
+    font-size:1.15rem; font-weight:700; color:var(--forest); line-height:1.95; text-align:center;
+    background:var(--cream-2); border-radius:var(--radius-m); padding:22px; margin:24px auto;
+  }
+  .about p{ color:var(--ink-soft); font-weight:600; font-size:.95rem; }
+
+  .growth-lede{
+    font-size:1.15rem; font-weight:800; color:var(--forest); line-height:1.8; margin:22px auto 8px;
+  }
+  .growth-timeline{ display:flex; flex-direction:column; align-items:center; margin:34px 0 6px; }
+  .growth-step{ display:flex; flex-direction:column; align-items:center; text-align:center; position:relative; padding-bottom:30px; max-width:300px; }
+  .growth-step:last-child{ padding-bottom:0; }
+  .growth-step::before{ content:""; position:absolute; left:50%; top:52px; bottom:-4px; width:2px; background:var(--line); transform:translateX(-50%); }
+  .growth-step:last-child::before{ display:none; }
+  .growth-icon{
+    width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    margin-bottom:12px; position:relative; z-index:1;
+  }
+  .growth-icon svg{ width:26px; height:26px; }
+  .growth-step:nth-child(1) .growth-icon{ background:var(--tint-gold); }
+  .growth-step:nth-child(2) .growth-icon{ background:var(--tint-sky); }
+  .growth-step:nth-child(3) .growth-icon{ background:var(--tint-coral); }
+  .growth-step:nth-child(4) .growth-icon{ background:var(--tint-forest); }
+  .growth-step p{ font-size:.92rem; font-weight:600; color:var(--ink-soft); }
+  .growth-step .growth-final{ font-weight:800; color:var(--forest); font-size:.98rem; }
+
+  /* ---------- CHECKLIST ---------- */
+  .checklist{ background:var(--cream-2); }
+  .check-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:26px; }
+  .check-item{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px; background:var(--tint-forest); border-radius:var(--radius-s); padding:18px 14px; }
+  .check-item:nth-child(2n){ background:var(--tint-coral); }
+  .check-item:nth-child(3n){ background:var(--tint-sky); }
+  .check-item:nth-child(4n){ background:var(--tint-pink); }
+  .check-item:nth-child(5n){ background:var(--tint-gold); }
+  .check-item svg{ flex:none; width:26px; height:26px; }
+  .check-item p{ font-size:.86rem; font-weight:700; }
+
+  /* ---------- TREE ---------- */
+  .tree-diagram{ position:relative; margin:30px 0 8px; display:flex; flex-direction:column; align-items:center; }
+  .tree-branch-row{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; width:100%; }
+  .tree-card{ background:var(--cream-2); border:2px solid var(--line); border-radius:var(--radius-s); padding:13px; font-size:.8rem; font-weight:600; color:var(--ink-soft); text-align:center; }
+  .tree-card strong{ display:block; color:var(--ink); font-size:.86rem; margin-bottom:2px; }
+  .tree-connector{ width:3px; height:24px; background:var(--gold); border-radius:2px; margin:6px 0; }
+  .tree-trunk{ background:var(--forest); color:#FFFBF4; text-align:center; padding:20px; border-radius:var(--radius-m); width:100%; max-width:280px; box-shadow:0 6px 0 var(--forest-2); }
+  .tree-trunk small{ display:block; font-size:.72rem; opacity:.8; margin-bottom:4px; }
+  .tree-trunk strong{ font-size:1.08rem; }
+  .root-label{ text-align:center; color:var(--ink-soft); font-size:.78rem; margin-top:14px; }
+  .tree-roots{ display:flex; gap:8px; overflow-x:auto; margin-top:12px; padding:2px 2px 8px; scrollbar-width:none; }
+  .tree-roots::-webkit-scrollbar{ display:none; }
+  .root-pill{ flex:0 0 auto; border:2px dashed var(--forest); color:var(--forest); background:var(--cream); border-radius:999px; padding:7px 15px; font-size:.78rem; font-weight:700; }
+
+  /* ---------- TARGET / SUPPORT ---------- */
+  .target{ background:var(--cream); }
+  .target-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:26px 0; }
+  .target-card{ background:var(--tint-forest); border-radius:var(--radius-m); padding:16px 12px; text-align:center; }
+  .target-card:nth-child(2n){ background:var(--tint-coral); }
+  .target-card:nth-child(3n){ background:var(--tint-gold); }
+  .target-card:nth-child(4n){ background:var(--tint-pink); }
+  .target-card svg{ margin:0 auto 8px; width:34px; height:34px; }
+  .target-card span{ font-size:.82rem; font-weight:700; display:block; }
+  .target-card small{ font-size:.72rem; font-weight:600; color:var(--ink-soft); }
+
+  .support-line{
+    font-size:1.02rem; font-weight:700; color:var(--forest); line-height:1.85; text-align:center;
+    padding:24px 8px 0; border-top:3px dotted var(--line); margin-top:10px;
+  }
+
+  /* ---------- FAMILY SUPPORT PROGRAMS ---------- */
+  .programs{ background:var(--cream-2); }
+  .program-list{ display:flex; flex-direction:column; gap:14px; margin-top:26px; }
+  .program-item{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; background:var(--tint-sky); border-radius:var(--radius-m); padding:20px 18px; }
+  .program-item:nth-child(2n){ background:var(--tint-pink); }
+  .program-item:nth-child(3n){ background:var(--tint-gold); }
+  .program-item:nth-child(4n){ background:var(--tint-forest); }
+  .program-item svg{ flex:none; width:34px; height:34px; }
+  .program-item h3{ font-size:.95rem; margin-bottom:2px; }
+  .program-item p{ font-size:.82rem; font-weight:600; color:var(--ink-soft); }
+
+  /* ---------- HOME SERVICES ---------- */
+  .services{ background:var(--cream); }
+  .service-scroll{ display:flex; gap:12px; overflow-x:auto; margin-top:26px; padding-bottom:8px; scrollbar-width:none; }
+  .service-scroll::-webkit-scrollbar{ display:none; }
+  .service-card{ flex:0 0 160px; background:var(--solid-forest); color:#FFFBF4; border-radius:var(--radius-m); padding:18px 14px; }
+  .service-card:nth-child(2n){ background:var(--solid-coral); }
+  .service-card:nth-child(3n){ background:var(--solid-sky); }
+  .service-card:nth-child(4n){ background:var(--solid-pink); }
+  .service-card:nth-child(5n){ background:var(--gold); color:var(--ink); }
+  .service-card svg{ width:28px; height:28px; margin-bottom:10px; }
+  .service-card{ text-align:center; }
+  .service-card svg{ margin-left:auto; margin-right:auto; }
+  .service-card h3{ font-size:.88rem; color:inherit; margin-bottom:4px; }
+  .service-card p{ font-size:.74rem; font-weight:600; opacity:.95; }
+
+  /* ---------- FLOW ---------- */
+  .flow{ background:var(--cream-2); }
+  .flow-steps{ display:flex; flex-direction:column; align-items:center; margin-top:30px; }
+  .flow-step{ display:flex; flex-direction:column; align-items:center; text-align:center; position:relative; padding-bottom:34px; }
+  .flow-step:last-child{ padding-bottom:0; }
+  .flow-step::before{ content:""; position:absolute; left:50%; top:44px; bottom:-6px; width:2px; background:var(--line); transform:translateX(-50%); }
+  .flow-step:last-child::before{ display:none; }
+  .flow-num{ flex:none; width:40px; height:40px; border-radius:50%; background:var(--forest); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.05rem; margin-bottom:12px; position:relative; z-index:1; }
+  .flow-step h3{ font-size:.95rem; margin-bottom:4px; }
+  .flow-step p{ font-size:.82rem; font-weight:600; color:var(--ink-soft); }
+
+  /* ---------- AREA ---------- */
+  .area{ background:var(--cream); }
+  .area-rail{ position:relative; padding-left:26px; margin-top:30px; text-align:left; }
+  .area-rail::before{ content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px; background:var(--forest); opacity:.4; }
+  .area-item{ position:relative; padding-bottom:30px; }
+  .area-item:last-child{ padding-bottom:0; }
+  .area-item::before{ content:""; position:absolute; left:-26px; top:4px; width:12px; height:12px; border-radius:50%; background:var(--cream); border:3px solid var(--forest); }
+  .area-item.is-future::before{ border-color:var(--gold); }
+  .area-tag{ display:inline-block; font-size:.72rem; font-weight:700; color:var(--forest); background:rgba(44,82,51,.1); padding:4px 10px; border-radius:6px; margin-bottom:6px; }
+  .area-item.is-future .area-tag{ color:var(--gold); background:rgba(228,165,38,.16); }
+  .area-item h3{ font-size:1.02rem; margin-bottom:5px; }
+  .area-item p{ font-size:.85rem; font-weight:600; color:var(--ink-soft); }
+  .area-future-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:28px; }
+  .future-tag{ font-size:.75rem; font-weight:700; color:var(--forest); border:2px solid var(--forest); border-radius:999px; padding:6px 13px; }
+
+  /* ---------- RECRUIT ---------- */
+  .recruit{ background:var(--forest-2); color:#FBEFE6; }
+  .recruit h2{ color:#FBEFE6; }
+  .recruit .lede{ color:#CFE0C9; }
+  .recruit-note{ display:inline-block; border:2px solid #FBEFE6; border-radius:999px; padding:9px 18px; font-size:.82rem; font-weight:700; margin-top:4px; }
+
+  /* ---------- AUDIENCE ---------- */
+  .audience-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:28px; }
+  .audience-card{ background:var(--tint-forest); border-radius:var(--radius-m); padding:18px 14px; text-align:center; }
+  .audience-card:nth-child(2n){ background:var(--tint-coral); }
+  .audience-card:nth-child(3n){ background:var(--tint-sky); }
+  .audience-card:nth-child(4n){ background:var(--tint-pink); }
+  .audience-card:nth-child(5n){ background:var(--tint-gold); }
+  .audience-card svg{ width:28px; height:28px; margin:0 auto 8px; }
+  .audience-card h3{ font-size:.88rem; margin-bottom:4px; }
+  .audience-card p{ font-size:.74rem; font-weight:600; color:var(--ink-soft); line-height:1.65; }
+  .audience-callout{ margin-top:26px; background:var(--cream-2); border-radius:var(--radius-m); padding:24px 20px; text-align:center; }
+  .audience-callout p.big{ font-size:1.08rem; font-weight:900; color:var(--coral); line-height:1.7; margin-bottom:6px; }
+  .audience-callout p.small{ font-size:.84rem; color:var(--ink-soft); }
+
+  /* ---------- CONTACT ---------- */
+  .contact{ background:linear-gradient(180deg, #FFF2D9 0%, var(--cream) 60%); text-align:center; }
+  .contact-card{ margin-top:26px; background:#fff; border:3px dashed var(--pink); border-radius:var(--radius-m); padding:28px 22px; box-shadow:0 10px 28px -12px rgba(255,143,101,.35); }
+  .contact-card .btn{ width:100%; justify-content:center; margin-bottom:10px; }
+  .contact-meta{ margin-top:22px; font-size:.82rem; color:var(--ink-soft); line-height:2; }
+  .signature{ margin-top:34px; padding-top:22px; border-top:2px dotted var(--line); font-size:.85rem; color:var(--ink-soft); }
+  .signature strong{ display:block; color:var(--ink); font-size:1.02rem; margin-bottom:4px; }
+
+  footer{ padding:32px 0 44px; text-align:center; font-size:.72rem; color:var(--ink-soft); opacity:.75; }
+
+  :focus-visible{ outline:3px solid var(--coral); outline-offset:3px; }
+  @media (prefers-reduced-motion: reduce){ *{ scroll-behavior:auto !important; } }
+</style>
+</head>
+<body>
+
+<!-- crayon filter (shared, invisible) -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="crayon" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.045 0.09" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <svg class="hero-illust icon-crayon" viewBox="0 0 200 170" fill="none">
+      <ellipse cx="100" cy="150" rx="70" ry="8" fill="#2C5233" opacity=".18"/>
+      <path d="M100 150V90" stroke="#C7986B" stroke-width="9" stroke-linecap="round"/>
+      <path d="M100 110c-12-4-20-14-20-14M100 100c14-3 22-12 22-12" stroke="#C7986B" stroke-width="6" stroke-linecap="round"/>
+      <path d="M100 30c-38 0-58 26-58 50 0 26 24 42 58 42s58-16 58-42c0-24-20-50-58-50Z" fill="#E75A34" opacity=".85"/>
+      <circle cx="72" cy="68" r="14" fill="#E4A526"/>
+      <circle cx="128" cy="60" r="16" fill="#2C5233"/>
+      <circle cx="100" cy="50" r="18" fill="#E2588F"/>
+      <circle cx="150" cy="90" r="7" fill="#2E86A8"/>
+      <path d="M40 60c8-10 8-20 3-24" stroke="#2C5233" stroke-width="4" stroke-linecap="round"/>
+      <path d="M156 48c9 2 15 9 15 16" stroke="#2C5233" stroke-width="4" stroke-linecap="round"/>
+      <path d="M28 30l3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z" fill="#E4A526"/>
+      <path d="M172 100l2.4 5.6 5.6 2.4-5.6 2.4-2.4 5.6-2.4-5.6-5.6-2.4 5.6-2.4 2.4-5.6Z" fill="#E2588F"/>
+      <path d="M16 100c0-4 3-6 6-6s6 2.5 6 6.5c0 5-6 8-6 8s-6-3.5-6-8.5Z" fill="#E75A34" opacity=".9"/>
+    </svg>
+
+    <div class="hero-tag">一般社団法人 Coccole Care ・ 大分</div>
+    <h1>想いがつながると、<br><span>未来</span>が変わります。</h1>
+    <p class="hero-sub">医療的ケアが必要な子どもと、家族に。<br>一緒に手を伸ばしてくれる人を探しています。</p>
+    <div class="hero-cta">
+      <a href="#about" class="btn btn-primary">私たちの活動を見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="tight" id="about">
+  <div class="wrap">
+    <p class="eyebrow">OUR STORY</p>
+    <h2>子どもだけでなく、<br>家族まるごとを支えたい。</h2>
+
+    <p class="growth-lede">数年前にまいた小さな種が、<br>今、ひとつの木に育ちつつあります。</p>
+
+    <div class="growth-timeline">
+      <div class="growth-step">
+        <div class="growth-icon icon-crayon">
+          <svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="12" rx="6" ry="9" fill="#E4A526"/><path d="M12 3v18" stroke="#4A3B33" stroke-width="1.2"/></svg>
+        </div>
+        <p>大分市で、医療的ケアのある<br>お子さんとご家族に寄り添う<br>訪問看護からはじまった。</p>
+      </div>
+      <div class="growth-step">
+        <div class="growth-icon icon-crayon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3c2 3 2 5 0 7-2-2-2-4 0-7Z" fill="#2E86A8"/><path d="M8 13c1 1.5 1 3 0 4M12 13c1 1.5 1 3 0 4M16 13c1 1.5 1 3 0 4" stroke="#2E86A8" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <p>うまくいかないことも、<br>涙したこともあった。</p>
+      </div>
+      <div class="growth-step">
+        <div class="growth-icon icon-crayon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 4v9" stroke="#E75A34" stroke-width="2" stroke-linecap="round"/><path d="M12 13c-3 1-4 4-5 7M12 13c3 1 4 4 5 7M12 13c-1.5 2-1.5 5-1 7M12 13c1.5 2 1.5 5 1 7" stroke="#E75A34" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <p>それでも、その全部が<br>今の木を育てる土になっている。</p>
+      </div>
+      <div class="growth-step">
+        <div class="growth-icon icon-crayon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3c-6 0-9 4-9 8 0 4 4 6 9 6s9-2 9-6c0-4-3-8-9-8Z" fill="#2C5233"/><path d="M12 17v4" stroke="#4A3B33" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <p class="growth-final">焦らず、比べず、<br>自分たちらしいペースで。<br>強くて、優しい木を、<br>一緒に育てましょう。</p>
+      </div>
+    </div>
+
+    <p class="about-quote">根を張ることの大切さを知った。<br>木は、土に入れないといけない。</p>
+  </div>
+</section>
+
+<!-- ================= CHECKLIST ================= -->
+<section class="checklist">
+  <div class="wrap">
+    <p class="eyebrow">WHAT WE VALUE</p>
+    <h2>訪問看護で<br>大切にしていること</h2>
+    <div class="check-grid">
+      <div class="check-item">
+        <svg class="icon-crayon" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#2C5233" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p>その子らしさを<br>大切にしたケア</p>
+      </div>
+      <div class="check-item">
+        <svg class="icon-crayon" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#E75A34" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p>医療的ケアの<br>安全・安心の提供</p>
+      </div>
+      <div class="check-item">
+        <svg class="icon-crayon" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#2E86A8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p>家族の不安・負担を<br>軽くするサポート</p>
+      </div>
+      <div class="check-item">
+        <svg class="icon-crayon" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#E2588F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p>24時間365日<br>対応の安心体制</p>
+      </div>
+      <div class="check-item">
+        <svg class="icon-crayon" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#E4A526" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p>多職種と連携した<br>チームケア</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TREE ================= -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">COCCOLE CAREの木</p>
+    <h2>根を張り、未来へつなぐ。</h2>
+    <p class="lede">今のかたちと、これから育てたい実。</p>
+
+    <div class="tree-diagram">
+      <div class="tree-branch-row">
+        <div class="tree-card"><strong>子ども・若者支援</strong>フリースクール・居場所づくり</div>
+        <div class="tree-card"><strong>医療と福祉の連携</strong>つなぐ・支える・寄り添う</div>
+        <div class="tree-card"><strong>家族支援</strong>家族まるごとサポート</div>
+        <div class="tree-card"><strong>地域への発信</strong>キャラバン活動</div>
+      </div>
+      <div class="tree-connector"></div>
+      <div class="tree-trunk">
+        <small>いま、ここにある木</small>
+        <strong>家族をまるごと支える<br>訪問看護ステーション</strong>
+      </div>
+      <div class="root-label">見えない根が、木を支えている</div>
+      <div class="tree-roots">
+        <span class="root-pill">経験と学び</span>
+        <span class="root-pill">人とのつながり</span>
+        <span class="root-pill">想い・ビジョン</span>
+        <span class="root-pill">覚悟と決断</span>
+        <span class="root-pill">感謝の気持ち</span>
+        <span class="root-pill">仕組み・基盤づくり</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TARGET ================= -->
+<section class="target">
+  <div class="wrap">
+    <p class="eyebrow">WHO WE SUPPORT</p>
+    <h2>ひとりじゃないよ。<br>つながれば、大丈夫。</h2>
+    <p class="lede">医療的ケア児、不登校、発達の悩み。<br>そして、誰にも言えず孤立している家族がいます。</p>
+
+    <div class="target-grid">
+      <div class="target-card">
+        <svg class="icon-crayon" viewBox="0 0 32 32" fill="none"><rect x="7" y="12" width="18" height="12" rx="3" fill="#2E86A8"/><path d="M11 12V9a5 5 0 0 1 10 0v3" stroke="#4A3B33" stroke-width="1.8"/><path d="M16 16v6M13 19h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        <span>医療的ケア児</span><small>人工呼吸器・経管栄養・<br>吸引が必要なお子さん</small>
+      </div>
+      <div class="target-card">
+        <svg class="icon-crayon" viewBox="0 0 32 32" fill="none"><path d="M6 26V14l10-6 10 6v12" fill="#E75A34"/><rect x="13" y="18" width="6" height="8" fill="#fff"/></svg>
+        <span>不登校</span><small>学びや居場所に悩むお子さん</small>
+      </div>
+      <div class="target-card">
+        <svg class="icon-crayon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="15" r="7" fill="#E4A526"/><path d="M14 13c0-1.5 1-2.5 2-2.5s2 1 2 2c0 1.5-2 2-2 3.5" stroke="#4A3B33" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>発達の悩み</span><small>成長のペースに<br>不安のあるご家族</small>
+      </div>
+      <div class="target-card">
+        <svg class="icon-crayon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="11" r="4" fill="#E2588F"/><path d="M9 25c0-5 3-8 7-8s7 3 7 8" fill="#E2588F"/></svg>
+        <span>孤立している家族</span><small>その他、医療的ケアや<br>支援が必要なご家族</small>
+      </div>
+    </div>
+
+    <p class="support-line">「困っている人が来る」のを待つのではなく、<br>私たちから地域へ出向いて、つながりを届ける。</p>
+  </div>
+</section>
+
+<!-- ================= FAMILY SUPPORT PROGRAMS ================= -->
+<section class="programs">
+  <div class="wrap">
+    <p class="eyebrow">FAMILY SUPPORT</p>
+    <h2>家族支援の取り組み</h2>
+    <p class="lede">ひとりで頑張らなくて大丈夫。<br>私たちが、そばにいます。</p>
+
+    <div class="program-list">
+      <div class="program-item">
+        <svg class="icon-crayon" viewBox="0 0 34 34" fill="none"><path d="M5 27l3-8a11 11 0 1 1 5 5l-8 3Z" fill="#2C5233"/></svg>
+        <div><h3>相談支援</h3><p>不安や悩みを一緒に考え、<br>必要なサービスにつなぎます。</p></div>
+      </div>
+      <div class="program-item">
+        <svg class="icon-crayon" viewBox="0 0 34 34" fill="none"><path d="M6 30V15l11-9 11 9v15H6Z" fill="#E75A34"/></svg>
+        <div><h3>レスパイト支援(在宅での休息支援)</h3><p>家族が休める時間をつくり、<br>心と体をリフレッシュ。</p></div>
+      </div>
+      <div class="program-item">
+        <svg class="icon-crayon" viewBox="0 0 34 34" fill="none"><circle cx="12" cy="14" r="5" fill="#2E86A8"/><circle cx="22" cy="14" r="5" fill="#E4A526"/><path d="M5 28c0-5 3-8 7-8s7 3 7 8M15 28c0-5 3-8 7-8s7 3 7 8" fill="#2E86A8" opacity=".5"/></svg>
+        <div><h3>家族会・交流会の開催</h3><p>同じ想いを持つ家族同士が<br>つながり、支え合える場に。</p></div>
+      </div>
+      <div class="program-item">
+        <svg class="icon-crayon" viewBox="0 0 34 34" fill="none"><path d="M17 6l13 6-13 6-13-6 13-6Z" fill="#E2588F"/><path d="M9 15v7c0 2.5 4.5 4.5 8 4.5s8-2 8-4.5v-7" fill="#E2588F" opacity=".6"/></svg>
+        <div><h3>学びの場の提供</h3><p>医療的ケアや災害時の備えなど、<br>役立つ情報をお届け。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOME SERVICES ================= -->
+<section class="services">
+  <div class="wrap">
+    <p class="eyebrow">AT-HOME CARE</p>
+    <h2>在宅での安心を<br>支えるサービス</h2>
+    <div class="service-scroll">
+      <div class="service-card">
+        <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="9" r="5" stroke="#fff" stroke-width="2"/><path d="M6 25c0-5 3.6-8 8-8s8 3 8 8" stroke="#fff" stroke-width="2"/></svg>
+        <h3>訪問看護</h3><p>健康状態の観察や<br>医療的ケアを行います。</p>
+      </div>
+      <div class="service-card">
+        <svg viewBox="0 0 28 28" fill="none"><rect x="6" y="10" width="16" height="11" rx="2" stroke="#fff" stroke-width="2"/><path d="M14 10v-4M11 6h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        <h3>医療的ケア・健康管理</h3><p>吸引・経管栄養・<br>服薬管理などを行います。</p>
+      </div>
+      <div class="service-card">
+        <svg viewBox="0 0 28 28" fill="none"><path d="M14 4v8l6 4" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="14" r="10" stroke="#fff" stroke-width="2"/></svg>
+        <h3>緊急時対応</h3><p>24時間365日対応で<br>万が一の時も安心。</p>
+      </div>
+      <div class="service-card">
+        <svg viewBox="0 0 28 28" fill="none"><rect x="9" y="4" width="10" height="18" rx="2" stroke="#fff" stroke-width="2"/><circle cx="14" cy="18" r="1.4" fill="#fff"/></svg>
+        <h3>医療機器の管理・相談</h3><p>機器のトラブル対応や<br>使い方の相談も。</p>
+      </div>
+      <div class="service-card">
+        <svg viewBox="0 0 28 28" fill="none"><path d="M14 23s-8-5-8-11a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 6-8 11-8 11Z" stroke="#4A3B33" stroke-width="2"/></svg>
+        <h3>ご家族のメンタルサポート</h3><p>気持ちのサポートや<br>相談に寄り添います。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FLOW ================= -->
+<section class="flow">
+  <div class="wrap">
+    <p class="eyebrow">HOW TO START</p>
+    <h2>ご利用までの流れ</h2>
+    <div class="flow-steps">
+      <div class="flow-step"><div class="flow-num">1</div><h3>お問い合わせ・ご相談</h3><p>まずはお気軽に<br>ご連絡ください。</p></div>
+      <div class="flow-step"><div class="flow-num">2</div><h3>面談・状況の確認</h3><p>ご自宅や希望の場所で<br>お話を伺います。</p></div>
+      <div class="flow-step"><div class="flow-num">3</div><h3>計画の作成・ご提案</h3><p>お子さんとご家族に<br>合わせたケア計画を作成します。</p></div>
+      <div class="flow-step"><div class="flow-num">4</div><h3>サービス開始</h3><p>チームで支え、<br>安心の在宅生活をサポートします。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AREA ================= -->
+<section class="area">
+  <div class="wrap">
+    <p class="eyebrow">WHERE WE GO</p>
+    <h2>活動エリアと展望</h2>
+    <p class="lede">想いをつなぎ、未来へ広げていきます。</p>
+
+    <div class="area-rail">
+      <div class="area-item">
+        <span class="area-tag">大分 拠点</span>
+        <h3>訪問看護・家族支援</h3>
+        <p>医療と暮らしをつなぐ。家族まるごとの支援と、地域とのつながりづくりを大分市で続けています。</p>
+      </div>
+      <div class="area-item is-future">
+        <span class="area-tag">福岡 準備中</span>
+        <h3>病院と自宅をつなぐ拠点へ</h3>
+        <p>退院後も安心できる支援、切れ目のない家族支援を、福岡でも届けられるように準備を進めています。</p>
+      </div>
+      <div class="area-item is-future">
+        <span class="area-tag">有明地域 その先へ</span>
+        <h3>Coccole Caravan</h3>
+        <p>地域をつなぎ、必要な家族へ想いを届ける移動型の取り組み。すぐに働くという形でなくても大丈夫です。</p>
+      </div>
+    </div>
+
+    <div class="area-future-tags">
+      <span class="future-tag">子育て世代への啓発活動</span>
+      <span class="future-tag">医療的ケア児支援ネットワーク</span>
+      <span class="future-tag">災害時の備え・防災サポート</span>
+      <span class="future-tag">ボランティア育成</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RECRUIT ================= -->
+<section class="recruit" id="recruit">
+  <div class="wrap">
+    <p class="eyebrow" style="color:#E4A526;">JOIN US</p>
+    <h2>つながる仲間を<br>探しています。</h2>
+    <p class="lede">一緒に、子どもたちと家族が<br>「ただいま」と言える地域をつくりませんか。<br>まずは、想いを語り合うところから。</p>
+    <span class="recruit-note">すぐに働くという形でなくても大丈夫です</span>
+  </div>
+</section>
+
+<!-- ================= AUDIENCE ================= -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">WHO WE'RE LOOKING FOR</p>
+    <h2>こんな方と<br>つながりたい</h2>
+    <p class="lede">資格や経験よりも、<br>「誰かの力になりたい」という想いを大切にしています。</p>
+
+    <div class="audience-grid">
+      <div class="audience-card"><svg class="icon-crayon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="10" r="5" fill="#2E86A8"/><path d="M6 27c0-6 4.5-10 10-10s10 4 10 10" fill="#2E86A8" opacity=".55"/></svg><h3>医師</h3><p>医療の専門性を地域の<br>支援につなげたい方</p></div>
+      <div class="audience-card"><svg class="icon-crayon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="10" r="5" fill="#E2588F"/><path d="M6 27c0-6 4.5-10 10-10s10 4 10 10" fill="#E2588F" opacity=".55"/></svg><h3>看護師</h3><p>看護の力で<br>暮らしを支えたい方</p></div>
+      <div class="audience-card"><svg class="icon-crayon" viewBox="0 0 32 32" fill="none"><circle cx="13" cy="11" r="3.5" fill="#E4A526"/><circle cx="21" cy="16" r="3" fill="#E4A526" opacity=".6"/><path d="M6 27c0-5 3-8.5 7-8.5s6 2.5 6.5 5.5" fill="#E4A526" opacity=".5"/></svg><h3>助産師</h3><p>妊娠・出産・子育てを<br>切れ目なく支えたい方</p></div>
+      <div class="audience-card"><svg class="icon-crayon" viewBox="0 0 32 32" fill="none"><path d="M8 20c2-6 6-9 8-9s6 3 8 9" fill="#2C5233" opacity=".6"/><path d="M8 20h16" stroke="#4A3B33" stroke-width="2"/></svg><h3>リハビリスタッフ</h3><p>子どもたちの成長や<br>生活を支えたい方</p></div>
+      <div class="audience-card"><svg class="icon-crayon" viewBox="0 0 32 32" fill="none"><rect x="7" y="9" width="18" height="14" rx="3" fill="#E75A34" opacity=".8"/></svg><h3>その他専門職</h3><p>相談員・心理士・<br>保育士・教員など</p></div>
+      <div class="audience-card"><svg class="icon-crayon" viewBox="0 0 32 32" fill="none"><path d="M16 7l9 4-9 4-9-4 9-4Z" fill="#2E86A8"/><path d="M9 15v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" fill="#2E86A8" opacity=".5"/></svg><h3>学生</h3><p>学びを活かして<br>地域や人の役に立ちたい方</p></div>
+      <div class="audience-card"><svg class="icon-crayon" viewBox="0 0 32 32" fill="none"><path d="M16 25s-8-5-8-11a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 6-8 11-8 11Z" fill="#E2588F"/></svg><h3>当事者のご家族</h3><p>同じ経験を持つ<br>方同士で支え合いたい方</p></div>
+      <div class="audience-card"><svg class="icon-crayon" viewBox="0 0 32 32" fill="none"><path d="M6 26V15l10-7 10 7v11" fill="#E4A526" opacity=".7"/></svg><h3>地域の方々</h3><p>地域のつながりの中で<br>支え合いの輪を広げたい方</p></div>
+    </div>
+
+    <div class="audience-callout">
+      <p class="big">「誰かの力になりたい」<br>「地域をもっと温かくしたい」</p>
+      <p class="small">そんな想いを、資格や経験よりも大切にしています。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="eyebrow">CONTACT</p>
+    <h2>興味のある方は、<br>お気軽にDMください。</h2>
+    <p class="lede" style="margin:0 auto 30px;">見学・お話だけでも大歓迎です。<br>まずは、想いを語り合うところから始めませんか。</p>
+
+    <div class="contact-card">
+      <a class="btn btn-primary" href="https://www.instagram.com/coccole0401" target="_blank" rel="noopener">Instagramでメッセージを送る</a>
+      <a class="btn btn-ghost" href="mailto:coccolecare0401@gmail.com">メールで問い合わせる</a>
+
+      <div class="contact-meta">
+        一般社団法人 コッコレケア<br>
+        訪問看護ステーション コッコレ<br>
+        TEL 097-535-7716(代表)<br>
+        coccolecare0401@gmail.com ／ Instagram @coccole0401
+      </div>
+
+      <div class="signature">
+        <strong>田中紀子(NORIKO)</strong>
+        一般社団法人 Coccole Care 代表理事
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© Coccole Care ― 大分市の訪問看護・家族支援</footer>
+
+</body>
+</html>
